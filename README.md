@@ -1,17 +1,15 @@
 # Understanding and Mitigating Representation Drift of Code Models under Software Distribution Shifts
 
-This repository contains the implementation and experimental resources for our study of code representation models under software distribution shifts.
 
 We investigate the performance degradation, OOD detection, representation characteristics, and adaptation strategies of pretrained code models across diverse software engineering tasks.
 
-## Overview
+<p align="center">
+  <span style="font-size: 20px; font-weight: bold;">Overview of Our Study</span>
+</p>
 
-Our study covers:
-
-- **5 Pretrained Models:** RoBERTa, CodeBERT, GraphCodeBERT, CodeT5, and PLBART.
-- **10 Datasets:** Covering 7 downstream tasks.
-- **5 Distribution Shifts:** CST, Token, User, Time, and Language.
-- **3 Task Families:** Classification, Retrieval, and Generation.
+<p align="center">
+  <img src="./img/overview.png" width="1000" title="Overview of Our Study" alt="Overview of Our Study">
+</p>
 
 ## 1. Experimental Setup
 
