@@ -33,9 +33,21 @@ Code-Model-Representation-Drift/
 
 ## 2. Environment
 
-Our experiments were conducted in Linux environments using Python and PyTorch.
+Our experiments were conducted in a Linux environment. The main libraries and their versions are as follows:
 
-The required dependencies may vary across models and downstream tasks. Please configure the corresponding environment before running each experiment.
+| Component | Version |
+|---|---|
+| OS | Linux (Ubuntu, kernel 5.4.0-100-generic) |
+| Python | 3.8.5 |
+| TensorFlow | 2.5.0 |
+| NumPy | 1.19.5 |
+| Pandas | 1.3.4 |
+| SciPy | 1.7.2 |
+| scikit-learn | 1.0.1 |
+| Matplotlib | 3.4.3 |
+
+Additional dependencies are required for the corresponding model implementations.
+
 
 ## 3. Reproducing the Experiments
 
