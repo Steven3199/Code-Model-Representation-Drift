@@ -1,29 +1,74 @@
+
 # Understanding and Mitigating Representation Drift of Code Models under Software Distribution Shifts
 
+This repository provides the code and datasets for our empirical study on the robustness of pretrained code models under software distribution shifts.
 
-We investigate the performance degradation, OOD detection, representation characteristics, and adaptation strategies of pretrained code models across diverse software engineering tasks.
+We investigate **OOD generalization, OOD detection, layer-wise representation diagnosis, and model adaptation** across seven downstream software engineering (SE) tasks, five pretrained models, and five distribution shift types.
 
-<p align="center">
-  <span style="font-size: 20px; font-weight: bold;">Overview of Our Study</span>
-</p>
+## 1. Repository Structure
 
-<p align="center">
-  <img src="./img/overview.png" width="1000" title="Overview of Our Study" alt="Overview of Our Study">
-</p>
+```text
+Code-Model-Representation-Drift/
+├── code/                           # Experimental implementations
+│   ├── CodeS/
+│   ├── CodeSearchNet/
+│   ├── CodeUpdateArena/
+│   ├── CodeXGLUE-BigCloneBench/
+│   ├── CodeXGLUE-Bugs2Fix/
+│   ├── CodeXGLUE-CodeTrans/
+│   └── CodeXGLUE-Devign/
+│
+├── dataset/                        # Experimental datasets
+│   ├── CodeS/
+│   ├── CodeSearchNet/
+│   ├── CodeUpdateArena/
+│   ├── CodeXGLUE-BigCloneBench/
+│   ├── CodeXGLUE-Bugs2Fix/
+│   ├── CodeXGLUE-CodeTrans/
+│   └── CodeXGLUE-Devign/
+│
+├── .gitattributes
+└── README.md
+```
 
-## 1. Experimental Setup
+## 2. Environment
 
-### Datasets and Distribution Shifts
+Our experiments were conducted in Linux environments using Python and PyTorch.
 
-The datasets, ID/OOD settings, downstream tasks, and evaluation metrics used in our study are summarized below.
+The required dependencies may vary across models and downstream tasks. Please configure the corresponding environment before running each experiment.
 
-<p align="center">
-  <img src="./img/dataset.png" width="100%" alt="Datasets and Shift Settings">
-</p>
+## 3. Reproducing the Experiments
 
-### Pretrained Models
+**Step 1: Clone the repository**
 
-We evaluate five representative pretrained code models:
+```bash
+git clone https://github.com/Steven3199/Code-Model-Representation-Drift.git
+cd Code-Model-Representation-Drift
+```
+
+**Step 2: Prepare the datasets and models**
+
+The `dataset/` directory contains the experimental datasets organized by benchmark, while the `code/` directory contains the corresponding implementations.
+
+Download the required pretrained model checkpoints from [Hugging Face](https://huggingface.co/) and configure their paths in the relevant scripts.
+
+**Step 3: Run the experiments**
+
+Navigate to the corresponding directory under `code/` and configure the dataset paths, model checkpoints, and experimental parameters.
+
+The experiments are organized into five research questions:
+
+- **RQ1 — OOD Generalization:** Evaluate ID and OOD performance under different distribution shifts.
+- **RQ2 — OOD Detection:** Evaluate task-adapted OOD detection methods.
+- **RQ3 — Representation Diagnosis:** Analyze layer-wise representations using Alignment, Anisotropy, Effective Rank, and Entropy.
+- **RQ4 — Traditional Adaptation:** Evaluate Transfer Learning (TL), Elastic Weight Consolidation (EWC), and Replay.
+- **RQ5 — Diagnostics-guided Adaptation:** Perform representation-guided data allocation, TPE-based configuration search, Pareto selection, and configuration transfer.
+
+Run the corresponding experimental scripts for the selected dataset, model, and research question.
+
+## 4. Experimental Settings
+
+We evaluate five representative pretrained models:
 
 - RoBERTa
 - CodeBERT
@@ -31,51 +76,12 @@ We evaluate five representative pretrained code models:
 - CodeT5
 - PLBART
 
-## 2. OOD Detection
+Five types of distribution shifts are considered:
 
-We investigate task-adapted OOD detection methods based on the prediction structures of different downstream tasks.
+- **CST Shift**
+- **Token Shift**
+- **User Shift**
+- **Time Shift**
+- **Language Shift**
 
-| Task Family | Detection Methods |
-|---|---|
-| Classification | MSP, Entropy, MaxLogit, Energy, Mahalanobis, Mahalanobis++, KNN, ViM, GradNorm |
-| Retrieval | Matching Score, Ranking Entropy, KNN Distance |
-| Generation | Sequence-level NLL, Token Entropy, Encoder Distance |
-
-Detection effectiveness is evaluated using AUROC, AUPR, and TNR@95.
-
-## 3. Representation Diagnostics
-
-We analyze ID–OOD representation differences using four complementary diagnostics:
-
-- **Alignment**
-- **Anisotropy**
-- **Effective Rank**
-- **Entropy**
-
-Layer-wise representations are extracted from fine-tuned models to investigate how distribution shifts affect representation characteristics.
-
-## 4. Model Adaptation
-
-We evaluate three conventional adaptation strategies:
-
-- Transfer Learning (TL)
-- Elastic Weight Consolidation (EWC)
-- Replay
-
-We further propose a representation-diagnostics-guided adaptation framework based on Replay, incorporating TPE-based configuration search, OOD data re-splitting, Pareto selection, and configuration transfer.
-
-## 5. Environment
-
-Experiments are conducted in a Linux environment.
-
-| Component | Version |
-|---|---|
-| Python | 3.8.5 |
-| NumPy | 1.19.5 |
-| Pandas | 1.3.4 |
-| SciPy | 1.7.2 |
-| scikit-learn | 1.0.1 |
-| Matplotlib | 3.4.3 |
-| TensorFlow | 2.5.0 |
-
-Other dependencies are specified by the corresponding model implementations.
+For further details on experimental configurations, evaluation metrics, and results, please refer to our paper.
